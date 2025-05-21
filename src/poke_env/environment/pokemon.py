@@ -557,6 +557,14 @@ class Pokemon:
 
         self._name = request_pokemon["ident"][4:]
         self._item = request_pokemon["item"]
+        
+        if self._terastallized_type is None:
+            try:
+                self._terastallized_type = PokemonType.from_name(
+                    request_pokemon["teraType"]
+                )
+            except KeyError:
+                pass
 
         details = request_pokemon["details"]
         self._update_from_details(details)
